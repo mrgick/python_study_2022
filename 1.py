@@ -14,7 +14,7 @@ def is_number(x):
     Проверка является ли x числом.
     """
     try:
-        int(x)
+        float(x)
         return True
     except:
         return False
@@ -33,8 +33,8 @@ def main():
         return 1
 
     # перевод строки в числа
-    input_number = int(input_number)
-    input_border = int(input_border)
+    input_number = float(input_number)
+    input_border = float(input_border)
 
     # проверка границы
     if input_number < input_border:
