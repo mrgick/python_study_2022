@@ -1,4 +1,0 @@
-{
-    "python.formatting.autopep8Path": "yapf",
-    "python.formatting.provider": "yapf"
-}
