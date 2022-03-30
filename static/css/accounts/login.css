@@ -1,0 +1,51 @@
+.auth {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.field p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--link-404-color);
+    font-size: 16px;
+}
+
+.field input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 160px;
+    border-radius: 10px;
+}
+
+.error-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 200px;
+    color:var(--error-color);
+    font-size: 16px;
+}
+
+.btn-login {
+    margin-top: 10px;
+    margin-bottom: 10px;   
+}
+.btn-login input {
+    border-radius: 10px;
+    padding: 10px;
+    width: 170px;
+    color: var(--link-404-color);
+    background-color: var(--nav-back-color);
+}
+
+.registration-link {
+    margin-top: 20px;
+}
+.registration-link a{
+    color:var(--link-404-color);
+}

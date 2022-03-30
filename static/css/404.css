@@ -1,0 +1,18 @@
+.info-404 {
+    margin: 10px;
+    text-align: center;
+    font-size: 25px;
+    color:var(--nav-text-color);
+}
+
+.info-404 p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.info-404 a {
+    margin-top: 20px;
+    text-align: center;
+    color:var(--link-404-color)
+}

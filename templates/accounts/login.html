@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} Авторизация {% endblock %}
+{% block links %}
+<link rel="stylesheet" href="/static/css/accounts/login.css">{%endblock%}
+
+{% block content %}
+
+{% if next %}
+{% endif %}
+<div class="auth">
+    <form method="post" action="/accounts/login/">
+        {% csrf_token %}
+
+        <div class="field">
+            <p>{{form.username.label}}</p>
+            {{ form.username }}
+        </div>
+        <div class="field">
+            <p>{{form.password.label}}</p>
+            {{ form.password }}
+        </div>
+        {% if form.errors %}
+        <div class="error-text">
+            <p>Неправильно введёно имя пользователя или пароль. Попробуйте войти заново.
+            </p>
+        </div>
+        {% endif %}
+        <div class="btn-login">
+            <input type="submit" value="Войти">
+            <input type="hidden" name="next" value="{{ next }}">
+        </div>
+    </form>
+
+    <div class="registration-link">
+        <a href="/accounts/registration/">Регистрация</a>
+    </div>
+</div>
+{% endblock %}

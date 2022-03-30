@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    {%block links%} {%endblock%}
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="navbar-item left">
+                <a href="/">Главная</a>
+            </li>
+            <li class="navbar-item left">
+                <a href="/blogs">Блоги</a>
+            </li>
+
+            {%if request.user.is_authenticated%}
+            <li class="navbar-item right">
+                <a href="/accounts/logout">Выйти</a>
+            </li>
+            <li class="navbar-item right">
+                <a href="#">{{request.user.username}}</a>
+            </li>
+            {%else%}
+            <li class="navbar-item right">
+                <a href="/accounts/login">Войти</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {%block content%} {%endblock%}
+    
+</body>
+
+</html>

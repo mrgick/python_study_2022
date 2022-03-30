@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+:root {
+    --text-color: #3a4549;
+    --back-color: DodgerBlue;
+    --link-404-color:antiquewhite;
+    --error-color:rgb(255, 182, 166);
+    --nav-back-color: #0051ba;
+    --nav-text-color: #d6dce8;
+    --nav-text-hover-color: #2071bd;
+    --news-list-inside-back-color: #08c5ff;
+    --news-list-link-color: var(--text-color);
+    --news-list-link-hover-color: #3eb7fd;
+    --news-list-no-img-color: #8aa4bd;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    background-color: var(--back-color);
+    color: var(--text-color);
+}

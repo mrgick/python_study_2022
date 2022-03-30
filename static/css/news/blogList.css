@@ -1,0 +1,27 @@
+.text-title {
+    margin: 20px;
+    text-align: center;
+    font-size: 25px;
+    color:var(--nav-text-color);
+}
+
+.list-group {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    list-style: none;
+    max-width: 400px;
+}
+
+.list-item {
+    margin: 2px;
+    background-color: var(--news-list-inside-back-color);
+    border: 1px solid var(--link-404-color);
+}
+
+.list-item a{
+    color: var(--link-404-color);
+    font-size: 20px;
+    text-decoration: none;
+}

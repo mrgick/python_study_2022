@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %} {{news.title}} {% endblock title %}
+{% block links %}
+<link rel="stylesheet" href="/static/css/news/newsItem.css">{%endblock%}
+{% block content %}
+<div class="news">
+    {%if request.user == news.owner%}
+    <div class="news-editor"><a href="/news/{{news.id}}/edit/">Редактировать</a></div>
+    {%endif%}
+
+    <h1 class="news-title">{{news.title}}</h1>
+    
+    {%if news.image%}
+    <div class="news-img"><img src={{news.image.url}}></div>
+    {%endif%}
+
+    <p class="news-description">{{news.text}}</p>
+    <div class="news-additional-info">
+        <p>Дата создания {{news.created_date}}</p>
+        <p>Последнее редактирование {{news.modified_date}}</p>
+        <p>Автор {{news.owner}}</p>
+    </div>
+</div>
+{% endblock content %}

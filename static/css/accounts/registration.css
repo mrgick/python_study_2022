@@ -1,0 +1,49 @@
+.registration {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.field * {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    max-width: 500px;
+}
+
+.field p {
+    color: var(--link-404-color);
+    font-size: 16px;
+}
+
+.field input {
+    padding: 5px;
+    width: 160px;
+    border-radius: 10px;
+}
+
+.help-text{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+
+.error-text {
+    color: var(--error-color);
+    font-size: 16px;
+}
+
+.btn-registration {
+    margin:10px;
+}
+
+.btn-registration input {
+    border-radius: 10px;
+    padding: 10px;
+    width: 170px;
+    color: var(--link-404-color);
+    background-color: var(--nav-back-color);
+}

@@ -1,0 +1,29 @@
+.navbar-nav {
+    position: static;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--nav-back-color);
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.navbar-item a {
+    display: block;
+    color: var(--nav-text-color);
+    text-align: center;
+    font-size: 16px;
+    padding: 16px 18px;
+    text-decoration: none;
+}
+
+.navbar-item a:hover {
+    background-color: var(--nav-text-hover-color);
+}

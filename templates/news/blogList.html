@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Список блогов {% endblock title %}
+{% block links %}<link rel="stylesheet" href="/static/css/news/blogList.css">{%endblock%}
+{% block content %}
+<div class="text-title">Список блогов</div>
+
+<ul class="list-group">
+    {%for blog in blogs_list%}
+    <li class="list-item"><a href='/blog/{{blog.id}}/'>{{blog.name}}</a></li>
+    {%endfor%}
+</ul>
+
+{% endblock content%}
