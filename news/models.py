@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import pre_delete, post_save
-from django.dispatch.dispatcher import receiver
 
 
 class Category(models.Model):
@@ -38,17 +36,3 @@ class News(models.Model):
             return self.text[:max_length] + "..."
         else:
             return self.text
-
-
-@receiver(pre_delete, sender=News)
-def News_delete(sender, instance, **kwargs):
-    instance.image.delete(False)
-
-
-"""
-@receiver(post_save, sender=News)
-def News_save(sender, instance, raw, using, update_fields, **kwargs):
-    print(instance, raw, using, update_fields)
-    #if update_fields == 'image':
-    #    instance.image.delete(False)
-"""
