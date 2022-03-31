@@ -1,5 +1,3 @@
-from email.policy import default
-from tkinter.ttk import Widget
 from django import forms
 from .models import News, Category
 

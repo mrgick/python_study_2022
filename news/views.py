@@ -1,6 +1,4 @@
-from cmath import log
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import News, Category
 from .forms import NewsEditForm
 
@@ -50,10 +48,6 @@ def news_item_edit(request, news_id):
     if request.method == 'POST':
         form = NewsEditForm(data=request.POST, files=request.FILES, instance=news)
         if form.is_valid():
-            #news.title = form.cleaned_data.get('title')
-            #news.text = form.cleaned_data.get('text')
-            #news.blog = form.cleaned_data.get('blog')
-            #news.image = form.cleaned_data.get('image')
             form.save()
 
             return redirect('/news/{0}'.format(news.id))
