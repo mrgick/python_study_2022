@@ -8,11 +8,11 @@ class CategoryChoiceField(forms.ModelChoiceField):
         return "Категория: {}".format(obj.name)
 
 
-class NewsEditForm(forms.ModelForm):
+class NewsForm(forms.ModelForm):
 
-    blog = CategoryChoiceField(queryset=Category.objects.all(), label=News._meta.get_field('blog').verbose_name)
+    blog = CategoryChoiceField(queryset=Category.objects.all(),
+                               label=News._meta.get_field('blog').verbose_name)
 
     class Meta:
         model = News
         fields = ('title', 'text', 'image', 'blog')
-    

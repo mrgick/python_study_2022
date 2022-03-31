@@ -1,6 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, permission_required
+from .decorators import check_obj_exist, check_owner
 from .models import News, Category
-from .forms import NewsEditForm
+from .forms import NewsForm
 
 
 def index(request):
@@ -15,11 +18,9 @@ def all_blogs(request):
     return render(request, 'news/blogList.html', content)
 
 
+@check_obj_exist(Category, 'blog_id')
 def news_from_blog(request, blog_id):
-    blog = Category.objects.filter(id=blog_id)
-    if len(blog) == 0:
-        return render(request, '404.html')
-    blog = blog[0]
+    blog = Category.objects.filter(id=blog_id).first()
     news_list = News.objects.filter(blog=blog).order_by('-modified_date')
     content = {
         'news_list': news_list,
@@ -28,31 +29,61 @@ def news_from_blog(request, blog_id):
     return render(request, 'news/newsList.html', content)
 
 
+@check_obj_exist(News, 'news_id')
 def news_item(request, news_id):
-    news = News.objects.filter(id=news_id)
-    if len(news) == 0:
-        return render(request, '404.html')
-    content = {'news': news[0]}
+    news = News.objects.filter(id=news_id).first()
+    content = {'news': news}
     return render(request, 'news/newsItem.html', content)
 
 
-def news_item_edit(request, news_id):
-    news = News.objects.filter(id=news_id)
-    if len(news) == 0:
-        return render(request, '404.html')
-    elif request.user != news[0].owner:
-        return render(request, '404.html')
-
-    news = news[0]
-
+@login_required
+@check_owner
+@check_obj_exist(News, 'news_id')
+def news_item_delete(request, news_id):
     if request.method == 'POST':
-        form = NewsEditForm(data=request.POST, files=request.FILES, instance=news)
-        if form.is_valid():
-            form.save()
+        news = News.objects.filter(id=news_id).first()
+        news.delete()
+        return HttpResponse({'status': 'success'})
+    return render(request, '404.html')
 
+
+@permission_required('is_stuff', raise_exception=True)
+def news_item_add(request):
+    if request.method == 'POST':
+        news = News(owner=request.user)
+        form = NewsForm(data=request.POST, files=request.FILES, instance=news)
+        if form.is_valid():
+            news = form.save()
             return redirect('/news/{0}'.format(news.id))
     else:
-        form = NewsEditForm(instance=news)
+        form = NewsForm()
 
-    context = {'news': news, 'form': form}
+    context = {
+        'form': form,
+        'action': '/news/add/',
+        'title': 'Добавление новости'
+    }
+    return render(request, 'news/newsItemEditor.html', context)
+
+
+@login_required
+@check_owner
+@check_obj_exist(News, 'news_id')
+def news_item_edit(request, news_id):
+    news = News.objects.filter(id=news_id).first()
+
+    if request.method == 'POST':
+        form = NewsForm(data=request.POST, files=request.FILES, instance=news)
+        if form.is_valid():
+            form.save()
+            return redirect('/news/{0}'.format(news.id))
+    else:
+        form = NewsForm(instance=news)
+
+    context = {
+        'news': news,
+        'form': form,
+        'action': '/news/{0}/edit/'.format(news.id),
+        'title': 'Редактирование новости {0}'.format(news.title)
+    }
     return render(request, 'news/newsItemEditor.html', context)

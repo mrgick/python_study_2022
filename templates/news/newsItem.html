@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/static/css/news/newsItem.css">{%endblock%}
 {% block content %}
 <div class="news">
-    {%if request.user == news.owner%}
+    {%if request.user == news.owner or request.user.is_superuser%}
     <div class="news-editor"><a href="/news/{{news.id}}/edit/">Редактировать</a></div>
     {%endif%}
 

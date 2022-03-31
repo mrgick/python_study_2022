@@ -5,9 +5,9 @@
 {% block content %}
 
 <div class="editor">
-    <div class="text-title">Редактирование новости "{{news.title}}"</div>
+    <div class="text-title">{{title}}</div>
 
-    <form enctype="multipart/form-data" action="/news/{{news.id}}/edit/" method="post">
+    <form enctype="multipart/form-data" action="{{action}}" method="post">
         {% csrf_token %}
 
         {% for field in form %}
