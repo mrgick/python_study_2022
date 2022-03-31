@@ -19,7 +19,7 @@ class News(models.Model):
                               blank=True,
                               verbose_name="Фотография")
     blog = models.ForeignKey(Category,
-                             on_delete=models.CASCADE,
+                             on_delete=models.PROTECT,
                              verbose_name='Блог')
     owner = models.ForeignKey(User,
                               on_delete=models.CASCADE,
@@ -38,10 +38,13 @@ class News(models.Model):
             return self.text[:max_length] + "..."
         else:
             return self.text
-    
+
+
 @receiver(pre_delete, sender=News)
 def News_delete(sender, instance, **kwargs):
     instance.image.delete(False)
+
+
 """
 @receiver(post_save, sender=News)
 def News_save(sender, instance, raw, using, update_fields, **kwargs):
