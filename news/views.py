@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import permission_required
+from django.contrib.admin.views.decorators import staff_member_required
 from .decorators import check_obj_exist, check_owner
 from .models import News, Category
 from .forms import NewsForm
@@ -36,9 +37,10 @@ def news_item(request, news_id):
     return render(request, 'news/newsItem.html', content)
 
 
-@login_required
-@check_owner
 @check_obj_exist(News, 'news_id')
+@permission_required('news.delete_news', raise_exception=True)
+@staff_member_required
+@check_owner
 def news_item_delete(request, news_id):
     if request.method == 'POST':
         news = News.objects.filter(id=news_id).first()
@@ -47,8 +49,11 @@ def news_item_delete(request, news_id):
     return render(request, '404.html')
 
 
-@permission_required('is_stuff', raise_exception=True)
+@permission_required(('news.add_news', 'news.add_category'),
+                     raise_exception=True)
+@staff_member_required
 def news_item_add(request):
+    print(request.user)
     if request.method == 'POST':
         news = News(owner=request.user)
         form = NewsForm(data=request.POST, files=request.FILES, instance=news)
@@ -66,9 +71,11 @@ def news_item_add(request):
     return render(request, 'news/newsItemEditor.html', context)
 
 
-@login_required
-@check_owner
 @check_obj_exist(News, 'news_id')
+@permission_required(('news.change_news', 'news.add_category'),
+                     raise_exception=True)
+@staff_member_required
+@check_owner
 def news_item_edit(request, news_id):
     news = News.objects.filter(id=news_id).first()
 
