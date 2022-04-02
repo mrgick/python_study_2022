@@ -44,7 +44,7 @@ class NewsModelAdmin(admin.ModelAdmin):
         """
         Check if user is owner
         """
-        if obj == None:
+        if obj is None:
             return True
         elif request.user == obj.owner or request.user.is_superuser:
             return True
