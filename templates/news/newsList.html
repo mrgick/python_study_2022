@@ -8,7 +8,7 @@
 {% endblock static_files %}
 {% block content %}
     {% if request.user.is_staff or request.user.is_superuser %}
-        <div>
+        <div class="news-add">
             <a href={% url 'news add' %}>Добавить новость</a>
         </div>
     {% endif %}

@@ -5,15 +5,10 @@
 {% endblock title %}
 {% block static_files %}
     <link rel="stylesheet" href={% static 'css/news/newsItemEditor.css' %}/>
+    <script src={%static 'js/news/newsItemEditor.js'%} defer></script>
 {% endblock static_files %}
 {% block content %}
     <div class="editor">
-        {% if action == 'edit' %}
-            <form action={% url 'news delete' news.id %} method="post">
-                {% csrf_token %}
-                <input type="submit" value="Удалить"/>
-            </form>
-        {% endif %}
         <div class="text-title">{{ title }}</div>
         <form enctype="multipart/form-data" action="{{ url }}" method="post">
             {% csrf_token %}
@@ -32,5 +27,13 @@
                 <input type="submit" value="Сохранить"/>
             </div>
         </form>
+        {% if action == 'edit' %}
+            <form id="newsDeleting" action={% url 'news delete' news.id %} method="post">
+                {% csrf_token %}
+                <div class="btn-delete">
+                    <input type="submit" value="Удалить"/>
+                </div>
+            </form>
+        {% endif %}
     </div>
 {% endblock content %}

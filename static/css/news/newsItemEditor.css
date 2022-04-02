@@ -33,3 +33,19 @@ div.editor * {
     color: var(--color-white1);
     background-color: var(--color-blue1);
 }
+
+.btn-delete {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.btn-delete input {
+    border-radius: 10px;
+    padding: 10px;
+    width: 170px;
+    color: var(--color-white1);
+    background-color: var(--color-red2);
+}

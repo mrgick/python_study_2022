@@ -55,3 +55,20 @@
     text-align: center;
     border-radius: 10%;
 }
+
+.news-add {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.news-add a {
+    border-radius: 10px;
+    padding: 10px;
+    width: 170px;
+    text-decoration: none;
+    color: var(--color-white1);
+    background-color: var(--color-blue1);
+}
