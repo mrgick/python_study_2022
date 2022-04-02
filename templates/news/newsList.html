@@ -3,6 +3,9 @@
 {% block links %}
 <link rel="stylesheet" href="/static/css/news/newsList.css">{%endblock%}
 {% block content %}
+{%if request.user.is_staff or request.user.is_superuser%}
+    <div><a href="/news/add/">Добавить новость</a></div>
+{%endif%}
 <h1 class="news-title">{{title_name}}</h1>
 <div class="newsList">
     <div class="flex-container">

@@ -5,9 +5,15 @@
 {% block content %}
 
 <div class="editor">
+    {% if action == 'edit' %}
+    <form action="/news/{{news.id}}/delete/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Удалить">
+    </form>
+    {% endif %}
     <div class="text-title">{{title}}</div>
 
-    <form enctype="multipart/form-data" action="{{action}}" method="post">
+    <form enctype="multipart/form-data" action="{{url}}" method="post">
         {% csrf_token %}
 
         {% for field in form %}

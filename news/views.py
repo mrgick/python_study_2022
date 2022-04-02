@@ -45,7 +45,7 @@ def news_item_delete(request, news_id):
     if request.method == 'POST':
         news = News.objects.filter(id=news_id).first()
         news.delete()
-        return HttpResponse({'status': 'success'})
+        return redirect('/blog/{0}/'.format(news.blog.id))
     return render(request, '404.html')
 
 
@@ -64,8 +64,9 @@ def news_item_add(request):
         form = NewsForm()
 
     context = {
+        'action': 'add',
         'form': form,
-        'action': '/news/add/',
+        'url': '/news/add/',
         'title': 'Добавление новости'
     }
     return render(request, 'news/newsItemEditor.html', context)
@@ -88,9 +89,10 @@ def news_item_edit(request, news_id):
         form = NewsForm(instance=news)
 
     context = {
+        'action': 'edit',
         'news': news,
         'form': form,
-        'action': '/news/{0}/edit/'.format(news.id),
+        'url': '/news/{0}/edit/'.format(news.id),
         'title': 'Редактирование новости {0}'.format(news.title)
     }
     return render(request, 'news/newsItemEditor.html', context)
