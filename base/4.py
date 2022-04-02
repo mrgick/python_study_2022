@@ -7,6 +7,7 @@
 С помощью метода format выводим все данные в читаемом виде.
 """
 
+
 def is_number(x):
     """
     Проверка является ли x числом.
@@ -14,35 +15,37 @@ def is_number(x):
     try:
         float(x)
         return True
-    except:
+    except Exception:
         return False
+
 
 def main():
     vegetables = {}
-    for i in range(1,4,1):
+    for i in range(1, 4, 1):
         name = input('Введите название {0}-ого овоща: '.format(i))
-        vegetables.update({name:0})
+        vegetables.update({name: 0})
 
     for x in vegetables.keys():
-        print('Овощ:',x.lower())
-    
+        print('Овощ:', x.lower())
+
     for x in vegetables.keys():
-        print('Овощ:',x.upper())
-    
+        print('Овощ:', x.upper())
+
     for x in vegetables.keys():
-        print('Овощ:',x.title())
+        print('Овощ:', x.title())
 
     for key in vegetables.keys():
         while True:
             value = input('Введите количество овоща "{0}": '.format(key))
             if is_number(value):
-                break 
+                break
             else:
                 print('Вы должны ввести число!')
         vegetables[key] = value
-    
+
     for key, value in vegetables.items():
         print('Овощ - "{0}", количество - {1}'.format(key, value))
+
 
 if __name__ == '__main__':
     main()

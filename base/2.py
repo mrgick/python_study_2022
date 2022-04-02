@@ -17,7 +17,7 @@ def googling(keywords: str):
             return res[0]
         else:
             return None
-    except:
+    except Exception:
         return None
 
 
@@ -36,7 +36,7 @@ def main():
         print('\nВот, что мы нашли:')
         print('Название:', result['title'])
         print('Ссылка:', result['href'])
-        print('Информация:',result['body'],'\n')
+        print('Информация:', result['body'], '\n')
     else:
         print('Гуглинг не удался...')
 

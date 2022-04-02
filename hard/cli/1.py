@@ -29,10 +29,10 @@ def main():
     if N <= 0:
         return
 
-    max_dots = 0
+    max_length = 0
     for i in range(1, N + 1, 1):
-        max_dots += len(str(i))
-    max_dots *= 2
+        max_length += len(str(i))
+    max_length *= 2
 
     msg = ""
     for i in range(1, N + 1, 1):
@@ -42,7 +42,7 @@ def main():
             tmp = str(j)
             normal_line = normal_line + tmp
             reversed_line = tmp + reversed_line
-        dots = '.' * (max_dots - len(normal_line) * 2)
+        dots = '.' * (max_length - len(normal_line) * 2)
         msg = normal_line + dots + reversed_line + '\n' + msg
 
     print(msg, end='')

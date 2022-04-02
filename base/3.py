@@ -28,7 +28,7 @@ class Operation:
             try:
                 float(x)
                 return True
-            except:
+            except Exception:
                 return False
 
         values = []
@@ -65,7 +65,7 @@ def main():
     print('Виды операций:', ''.join([x + ', ' for x in OPERATIONS_TYPES])[:-2])
     input_operation = input('Введите тип операции: ')
 
-    if not input_operation in OPERATIONS_TYPES:
+    if input_operation not in OPERATIONS_TYPES:
         print('Введена неправильная операция.')
         return 1
 

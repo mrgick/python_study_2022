@@ -16,7 +16,7 @@ def is_number(x):
     try:
         float(x)
         return True
-    except:
+    except Exception:
         return False
 
 
