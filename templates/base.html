@@ -1,42 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="/static/css/base.css">
-    <link rel="stylesheet" href="/static/css/navbar.css">
-    {%block links%} {%endblock%}
-</head>
-
-<body>
-
-    <nav class="navbar">
-        <ul class="navbar-nav">
-            <li class="navbar-item left">
-                <a href="/">Главная</a>
-            </li>
-            <li class="navbar-item left">
-                <a href="/blogs">Блоги</a>
-            </li>
-
-            {%if request.user.is_authenticated%}
-            <li class="navbar-item right">
-                <a href="/accounts/logout">Выйти</a>
-            </li>
-            <li class="navbar-item right">
-                <a href="#">{{request.user.username}}</a>
-            </li>
-            {%else%}
-            <li class="navbar-item right">
-                <a href="/accounts/login">Войти</a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-
-    {%block content%} {%endblock%}
-    
-</body>
-
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <!--meta tags starts-->
+        <meta name="keywords" content="Meta Tags, Metadata" />
+        <meta name="description" content="News site."/>
+        <meta name="author" content="Gick" />
+        <!--meta tags ends-->
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <!--static files starts-->
+        <link rel="stylesheet" href={% static 'css/base.css' %}/>
+        <link rel="stylesheet" href={% static 'css/navbar.css' %}/>
+        {% block static_files %}
+        {% endblock static_files %}
+        <!--static files ends-->
+    </head>
+    <body>
+        {% block navbar %}
+            <nav class="navbar">
+                <ul class="navbar-nav">
+                    <li class="navbar-item left">
+                        <a href={% url 'home' %}>Главная</a>
+                    </li>
+                    <li class="navbar-item left">
+                        <a href={% url 'blogs list' %}>Блоги</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="navbar-item right">
+                            <a href={% url 'logout' %}>Выйти</a>
+                        </li>
+                        <li class="navbar-item right">
+                            <a href="#">{{ request.user.username }}</a>
+                        </li>
+                    {% else %}
+                        <li class="navbar-item right">
+                            <a href={% url 'login' %}>Войти</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endblock navbar %}
+        {% block content %}
+        {% endblock content %}
+    </body>
 </html>

@@ -7,7 +7,7 @@ from .models import News, Category
 from .forms import NewsForm
 
 
-def index(request):
+def home(request):
     news_list = News.objects.order_by('-modified_date')[:5]
     content = {'news_list': news_list, 'title_name': 'Последние новости'}
     return render(request, 'news/newsList.html', content)

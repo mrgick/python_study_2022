@@ -1,17 +1,17 @@
-.info-404 {
+.error {
     margin: 10px;
     text-align: center;
     font-size: 25px;
     color:var(--color-white2);
 }
 
-.info-404 p {
+.error p {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
 }
 
-.info-404 a {
+.error a {
     margin-top: 20px;
     text-align: center;
     color:var(--color-white1)

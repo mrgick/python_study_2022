@@ -1,40 +1,37 @@
 {% extends "base.html" %}
-
-{% block title %} Регистрация {% endblock %}
-{% block links %}
-<link rel="stylesheet" href="/static/css/accounts/registration.css">{%endblock%}
-
-
+{% load static %}
+{% block title %}
+    Регистрация
+{% endblock title %}
+{% block static_files %}
+    <link rel="stylesheet" href={% static 'css/accounts/registration.css' %}/>
+{% endblock static_files %}
 {% block content %}
-<div class="registration">
-    <form method="post" action="/accounts/registration/">
-        {% csrf_token %}
-
-
-        {% for field in form %}
-        <div class="field">
-            <p>{{ field.label_tag }}</p>
-            {{ field }}
-            {% if field.help_text %}
-            <div class="help-text">
-                <small>{{ field.help_text }}</small>
-            </div>
-            {% endif %}
-
-            {% for error in field.errors %}
-            <div>
-                <small class="error-text">{{ error }}</small>
-            </div>
-
+    <div class="registration">
+        <form method="post" action={% url 'registration' %}>
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="field">
+                    <p>
+                        {{ field.label_tag }}
+                    </p>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="help-text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div>
+                            <small class="error-text">{{ error }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
-        </div>
-        {% endfor %}
-
-        <div class="btn-registration">
-            <input type="submit" value="Регистрация">
-        </div>
-
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-</div>
-{% endblock %}
+            <div class="btn-registration">
+                <input type="submit" value="Регистрация"/>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}"/>
+        </form>
+    </div>
+{% endblock content %}

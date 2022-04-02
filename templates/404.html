@@ -1,9 +1,4 @@
-{% extends "base.html" %}
-{% block title %} Ошибка {% endblock %}
-{% block links %}<link rel="stylesheet" href="/static/css/404.css">{%endblock%}
-{% block content %}
-<div class="info-404">
-    <p> Страница не найдена...</p>
-    <a href="/">Вернуться на главную</a>
-</div>
-{% endblock content %}
+{% extends "error.html" %}
+{% block message %}
+    Страница не найдена.
+{% endblock message %}

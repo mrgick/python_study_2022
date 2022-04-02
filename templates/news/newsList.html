@@ -1,28 +1,38 @@
 {% extends "base.html" %}
-{% block title %} {{title_name}} {% endblock title %}
-{% block links %}
-<link rel="stylesheet" href="/static/css/news/newsList.css">{%endblock%}
+{% load static %}
+{% block title %}
+    {{ title_name }}
+{% endblock title %}
+{% block static_files %}
+    <link rel="stylesheet" href={% static 'css/news/newsList.css' %}/>
+{% endblock static_files %}
 {% block content %}
-{%if request.user.is_staff or request.user.is_superuser%}
-    <div><a href="/news/add/">Добавить новость</a></div>
-{%endif%}
-<h1 class="news-title">{{title_name}}</h1>
-<div class="newsList">
-    <div class="flex-container">
-        {% for news in news_list %}
+    {% if request.user.is_staff or request.user.is_superuser %}
         <div>
-            <div class="img-wrapper">
-                {%if news.image%}
-                <img src={{news.image.url}}>
-                {%else%}
-                <p>Без фото</p>
-                {% endif %}
-            </div>
-            <h3>{{ news.title }}</h3>
-            <p>{{news.short_text}}</p>
-            <a href="/news/{{news.id}}/" class="news-link">Читать далее</a>
+            <a href={% url 'news add' %}>Добавить новость</a>
         </div>
-        {% endfor %}
+    {% endif %}
+    <h1 class="news-title">{{ title_name }}</h1>
+    <div class="newsList">
+        <div class="flex-container">
+            {% for news in news_list %}
+                <div>
+                    <div class="img-wrapper">
+                        {% if news.image %}
+                            <img src={{ news.image.url }} alt="Фотография"/>
+                        {% else %}
+                            <p>
+                                Без фото
+                            </p>
+                        {% endif %}
+                    </div>
+                    <h3>{{ news.title }}</h3>
+                    <p>
+                        {{ news.short_text }}
+                    </p>
+                    <a href={% url 'news item' news.id %} class="news-link">Читать далее</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
 {% endblock content %}

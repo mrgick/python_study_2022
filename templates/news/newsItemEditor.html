@@ -1,36 +1,36 @@
 {% extends "base.html" %}
-{% block title %} Редактор новости {% endblock title %}
-{% block links %}
-<link rel="stylesheet" href="/static/css/news/newsItemEditor.css">{%endblock%}
+{% load static %}
+{% block title %}
+    Редактор новости
+{% endblock title %}
+{% block static_files %}
+    <link rel="stylesheet" href={% static 'css/news/newsItemEditor.css' %}/>
+{% endblock static_files %}
 {% block content %}
-
-<div class="editor">
-    {% if action == 'edit' %}
-    <form action="/news/{{news.id}}/delete/" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Удалить">
-    </form>
-    {% endif %}
-    <div class="text-title">{{title}}</div>
-
-    <form enctype="multipart/form-data" action="{{url}}" method="post">
-        {% csrf_token %}
-
-        {% for field in form %}
-        <div class="field">
-            <div>{{ field.label_tag }}</div>
-            <div>{{ field }}</div>
-            {% for error in field.errors %}
-            <div class="error-text">
-                <small>{{ error }}</small>
-            </div>
+    <div class="editor">
+        {% if action == 'edit' %}
+            <form action={% url 'news delete' news.id %} method="post">
+                {% csrf_token %}
+                <input type="submit" value="Удалить"/>
+            </form>
+        {% endif %}
+        <div class="text-title">{{ title }}</div>
+        <form enctype="multipart/form-data" action="{{ url }}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="field">
+                    <div>{{ field.label_tag }}</div>
+                    <div>{{ field }}</div>
+                    {% for error in field.errors %}
+                        <div class="error-text">
+                            <small>{{ error }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
-        </div>
-        {% endfor %}
-
-        <div class="btn-submit">
-            <input type="submit" value="Сохранить">
-        </div>
-    </form>
-</div>
-{% endblock content%}
+            <div class="btn-submit">
+                <input type="submit" value="Сохранить"/>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
