@@ -3,7 +3,7 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    color: var(--link-404-color);
+    color: var(--color-white1);
     max-width: 600px;
 }
 
@@ -44,10 +44,10 @@
     padding: 10px;
     border-radius: 10px;
     text-decoration: none;
-    background-color: var(--nav-back-color);
-    color: var(--link-404-color);
+    background-color: var(--color-blue1);
+    color: var(--color-white1);
 }
 
 .news-editor a:hover {
-    background-color: var(--nav-text-hover-color);
+    background-color: var(--color-blue2);
 }

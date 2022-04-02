@@ -16,7 +16,7 @@ div.editor * {
 }
 
 .error-text {
-    color:var(--error-color);
+    color:var(--color-red1);
     font-size: 16px;
 }
 
@@ -30,6 +30,6 @@ div.editor * {
     width: 150px;
     padding: 10px;
     border-radius: 5px;
-    color: var(--link-404-color);
-    background-color: var(--nav-back-color);
+    color: var(--color-white1);
+    background-color: var(--color-blue1);
 }

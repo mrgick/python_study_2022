@@ -2,7 +2,7 @@
     margin: 20px;
     text-align: center;
     font-size: 25px;
-    color:var(--nav-text-color);
+    color:var(--color-white2);
 }
 
 .list-group {
@@ -16,12 +16,12 @@
 
 .list-item {
     margin: 2px;
-    background-color: var(--news-list-inside-back-color);
-    border: 1px solid var(--link-404-color);
+    background-color: var(--color-light-blue1);
+    border: 1px solid var(--color-white1);
 }
 
 .list-item a{
-    color: var(--link-404-color);
+    color: var(--color-white1);
     font-size: 20px;
     text-decoration: none;
 }

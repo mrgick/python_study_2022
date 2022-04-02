@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: var(--nav-back-color);
+    background-color: var(--color-blue1);
 }
 
 .left {
@@ -17,7 +17,7 @@
 
 .navbar-item a {
     display: block;
-    color: var(--nav-text-color);
+    color: var(--color-white2);
     text-align: center;
     font-size: 16px;
     padding: 16px 18px;
@@ -25,5 +25,5 @@
 }
 
 .navbar-item a:hover {
-    background-color: var(--nav-text-hover-color);
+    background-color: var(--color-blue2);
 }

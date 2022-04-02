@@ -2,16 +2,15 @@
 
 :root {
     --text-color: #3a4549;
-    --back-color: DodgerBlue;
-    --link-404-color:antiquewhite;
-    --error-color:rgb(255, 182, 166);
-    --nav-back-color: #0051ba;
-    --nav-text-color: #d6dce8;
-    --nav-text-hover-color: #2071bd;
-    --news-list-inside-back-color: #08c5ff;
-    --news-list-link-color: var(--text-color);
-    --news-list-link-hover-color: #3eb7fd;
-    --news-list-no-img-color: #8aa4bd;
+    --background-color: DodgerBlue;
+    --color-white1:antiquewhite;
+    --color-red1:rgb(255, 182, 166);
+    --color-blue1: #0051ba;
+    --color-white2: #d6dce8;
+    --color-blue2: #2071bd;
+    --color-light-blue1: #08c5ff;
+    --color-light-blue2: #3eb7fd;
+    --color-grey1: #8aa4bd;
 }
 
 * {
@@ -26,6 +25,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    background-color: var(--back-color);
+    background-color: var(--background-color);
     color: var(--text-color);
 }

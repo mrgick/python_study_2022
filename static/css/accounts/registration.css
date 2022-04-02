@@ -15,7 +15,7 @@
 }
 
 .field p {
-    color: var(--link-404-color);
+    color: var(--color-white1);
     font-size: 16px;
 }
 
@@ -32,7 +32,7 @@
 
 
 .error-text {
-    color: var(--error-color);
+    color: var(--color-red1);
     font-size: 16px;
 }
 
@@ -44,6 +44,6 @@
     border-radius: 10px;
     padding: 10px;
     width: 170px;
-    color: var(--link-404-color);
-    background-color: var(--nav-back-color);
+    color: var(--color-white1);
+    background-color: var(--color-blue1);
 }

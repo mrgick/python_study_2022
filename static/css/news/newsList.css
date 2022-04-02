@@ -2,17 +2,17 @@
     margin: 20px;
     text-align: center;
     font-size: 25px;
-    color:var(--nav-text-color);
+    color:var(--color-white2);
 }
 
 .news-link {
     display: block;
-    color: var(--news-list-link-color);
+    color: var(---text-color);
     text-decoration: none;
 }
 
 .news-link:hover {
-    background-color: var(--news-list-link-hover-color);
+    background-color: var(--color-light-blue2);
     border-radius: 10%;
 }
 
@@ -38,7 +38,7 @@
     margin-bottom: 0px;
     text-align: center;
     font-size: 16px;
-    background: var(--news-list-no-img-color);
+    background: var(--color-grey1);
 }
 
 
@@ -49,7 +49,7 @@
 }
 
 .flex-container>div {
-    background-color: var(--news-list-inside-back-color);
+    background-color: var(--color-light-blue1);
     width: 300px;
     margin: 10px;
     text-align: center;

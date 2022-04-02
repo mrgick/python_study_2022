@@ -8,7 +8,7 @@
 .field p {
     margin-top: 10px;
     margin-bottom: 10px;
-    color: var(--link-404-color);
+    color: var(--color-white1);
     font-size: 16px;
 }
 
@@ -27,7 +27,7 @@
     margin-right: auto;
     text-align: center;
     width: 200px;
-    color:var(--error-color);
+    color:var(--color-red1);
     font-size: 16px;
 }
 
@@ -39,13 +39,13 @@
     border-radius: 10px;
     padding: 10px;
     width: 170px;
-    color: var(--link-404-color);
-    background-color: var(--nav-back-color);
+    color: var(--color-white1);
+    background-color: var(--color-blue1);
 }
 
 .registration-link {
     margin-top: 20px;
 }
 .registration-link a{
-    color:var(--link-404-color);
+    color:var(--color-white1);
 }
