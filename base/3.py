@@ -15,10 +15,10 @@ import typing
 
 class Operation:
 
-    __slots__ = ('type', 'nums', 'func')
+    __slots__ = ('label', 'nums', 'func')
 
-    def __init__(self, type: str, nums: int, func: typing.Callable) -> None:
-        self.type = type
+    def __init__(self, label: str, nums: int, func: typing.Callable) -> None:
+        self.label = label
         self.nums = nums
         self.func = func
 
@@ -50,17 +50,17 @@ class Operation:
 
 def main():
     OPERATIONS = (
-        Operation(type='+', nums=2, func=lambda x, y: x + y),
-        Operation(type='-', nums=2, func=lambda x, y: x - y),
-        Operation(type='*', nums=2, func=lambda x, y: x * y),
-        Operation(type='/', nums=2, func=lambda x, y: x / y),
-        Operation(type='**', nums=2, func=lambda x, y: x**y),
-        Operation(type='mod', nums=1, func=lambda x: abs(x)),
-        Operation(type='random', nums=0, func=lambda: random.random()),
-        Operation(type='!', nums=1, func=lambda x: math.factorial(x)),
-        Operation(type='acos', nums=1, func=lambda x: math.acos(x)),
+        Operation(label='+', nums=2, func=lambda x, y: x + y),
+        Operation(label='-', nums=2, func=lambda x, y: x - y),
+        Operation(label='*', nums=2, func=lambda x, y: x * y),
+        Operation(label='/', nums=2, func=lambda x, y: x / y),
+        Operation(label='**', nums=2, func=lambda x, y: x**y),
+        Operation(label='mod', nums=1, func=lambda x: abs(x)),
+        Operation(label='random', nums=0, func=lambda: random.random()),
+        Operation(label='!', nums=1, func=lambda x: math.factorial(x)),
+        Operation(label='acos', nums=1, func=lambda x: math.acos(x)),
     )
-    OPERATIONS_TYPES = [x.type for x in OPERATIONS]
+    OPERATIONS_TYPES = [x.label for x in OPERATIONS]
 
     print('Виды операций:', ''.join([x + ', ' for x in OPERATIONS_TYPES])[:-2])
     input_operation = input('Введите тип операции: ')
