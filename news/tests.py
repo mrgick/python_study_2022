@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpRequest
 from .models import News, Category
-from .forms import NewsForm
+from .forms import NewsForm, CategoryForm
 from .decorators import check_obj_exist, check_owner
 
 
@@ -157,3 +157,34 @@ class DecoratorsTestCase(TestCase):
         response = simple_view(request, news_id=self.news.id)
         self.assertEqual(response.status_code, 403,
                          'Error checks not owner decoration.')
+
+
+class BlogFormTestCase(TestCase):
+
+    def setUp(self):
+        self.form_data = {'name': 'testblogform'}
+        self.user = User.objects.create_superuser(username='t', password='t')
+        self.client = Client()
+        self.client.login(username='t', password='t')
+
+    def doCleanup(self):
+        self.user.delete()
+        blog = Category.objects.filter(name=self.form_data['name']).first()
+        if blog:
+            blog.delete()
+
+    def test_form(self):
+        form = CategoryForm(self.form_data)
+        self.assertTrue(form.is_valid(), 'Error with CategoryForm.')
+
+    def test_blog_add(self):
+        url = '/blog/add/'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200,
+                         "Can't get to blog add page.")
+        response = self.client.post(url, self.form_data)
+        self.assertEqual(response.status_code, 200,
+                         "Error in sending data on blog add page.")
+        blog = Category.objects.filter(name=self.form_data['name']).first()
+        self.assertIsNotNone(blog, 'Error in sending data on news add page.')
+        blog.delete()
