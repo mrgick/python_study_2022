@@ -5,8 +5,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .decorators import check_obj_exist, check_owner
 from .models import News, Category
 from .forms import NewsForm
-# https://docs.djangoproject.com/en/4.0/topics/pagination/
-# Добавить добавление блогов внутри редактирования
 
 
 def get_pagination(request, obj, max_per_page):
