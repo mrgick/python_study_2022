@@ -27,8 +27,8 @@
                             </p>
                         {% endif %}
                     </div>
-                    <h3>{{ news.title }}</h3>
-                    <p>
+                    <h3 class="news-title-field">{{ news.title }}</h3>
+                    <p class="news-text-field">
                         {{ news.short_text }}
                     </p>
                     <a href={% url 'news item' news.id %} class="news-link">Читать далее</a>

@@ -6,6 +6,8 @@
 }
 
 .news-link {
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: block;
     color: var(---text-color);
     text-decoration: none;
@@ -54,6 +56,23 @@
     margin: 10px;
     text-align: center;
     border-radius: 10%;
+}
+
+.news-title-field {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.news-text-field {
+    margin-top: 10px;
+    margin-left: 7px;
+    margin-right: 7px;
+    margin-bottom: 10px;
+    text-align: justify;
 }
 
 .news-add {
