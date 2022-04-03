@@ -1,7 +1,9 @@
-from urllib import response
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpRequest
 from .models import News, Category
+from .forms import NewsForm
+from .decorators import check_obj_exist, check_owner
 
 
 class GetPageTestCase(TestCase):
@@ -16,9 +18,9 @@ class GetPageTestCase(TestCase):
                                         owner=self.user)
 
     def doCleanup(self):
+        self.news.delete()
         self.blog.delete()
         self.user.delete()
-        self.news.delete()
 
     def get_page(self, url: str, status_code: int, error_message: str):
         response = self.client.get(url)
@@ -55,8 +57,7 @@ class NewsAddEditDeleteViewsTestCase(TestCase):
         self.news_form_data = {
             'title': 'test2',
             'text': 'test2',
-            'blog': str(self.blog.id),
-            'owner': str(self.user.id)
+            'blog': str(self.blog.id)
         }
         self.client.login(username='test', password='test')
 
@@ -67,10 +68,10 @@ class NewsAddEditDeleteViewsTestCase(TestCase):
             if news:
                 news.delete()
 
-        self.blog.delete()
-        self.user.delete()
         delete_news(self.news_kwargs['title'])
         delete_news(self.news_form_data['title'])
+        self.blog.delete()
+        self.user.delete()
 
     def get_page(self, url: str, status_code: int, error_message: str):
         response = self.client.get(url)
@@ -83,6 +84,10 @@ class NewsAddEditDeleteViewsTestCase(TestCase):
         news = News.objects.filter(id=news.id).first()
         self.assertIsNone(news, 'Error in sending data on news delete page.')
 
+    def test_NewsForm(self):
+        form = NewsForm(self.news_form_data)
+        self.assertTrue(form.is_valid(), 'Error with NewsForm.')
+
     def test_news_add(self):
         url = '/news/add/'
         self.get_page(url, 200, "Can't get news add page.")
@@ -94,10 +99,61 @@ class NewsAddEditDeleteViewsTestCase(TestCase):
 
     def test_news_edit(self):
         news = News.objects.create(**self.news_kwargs)
-        url = '/news/{}/edit/'.format(news.id)
+        url = '/news/{0}/edit/'.format(news.id)
         self.get_page(url, 200, "Can't get news edit page.")
         response = self.client.post(url, self.news_form_data)
         self.assertEqual(response.status_code, 302, "Can't add news.")
         news = News.objects.filter(title=self.news_form_data['title']).first()
         self.assertIsNotNone(news, 'Error in sending data on news edit page.')
         news.delete()
+
+
+class DecoratorsTestCase(TestCase):
+
+    def setUp(self):
+        self.blog = Category.objects.create(name='test')
+        self.user1 = User.objects.create_user(username='test1', password='t')
+        self.user2 = User.objects.create_user(username='test2', password='t')
+        self.news_kwargs = {
+            'title': 'test1',
+            'text': 'test1',
+            'blog': self.blog,
+            'owner': self.user1
+        }
+        self.news = News.objects.create(**self.news_kwargs)
+
+    def doCleanup(self):
+        self.news.delete()
+        self.blog.delete()
+        self.user1.delete()
+        self.user2.delete()
+
+    def test_obj_exist(self):
+
+        @check_obj_exist(News, 'news_id')
+        def simple_view(request, news_id):
+            return HttpResponse('test view')
+
+        request = HttpRequest()
+        response = simple_view(request, news_id=self.news.id)
+        self.assertEqual(response.status_code, 200,
+                         'Error checks obj exist decoration.')
+        response = simple_view(request, news_id=self.news.id + 1)
+        self.assertEqual(response.status_code, 404,
+                         'Error checks obj not exist decoration.')
+
+    def test_check_owner(self):
+
+        @check_owner
+        def simple_view(request, news_id):
+            return HttpResponse('test view')
+
+        request = HttpRequest()
+        request.user = self.user1
+        response = simple_view(request, news_id=self.news.id)
+        self.assertEqual(response.status_code, 200,
+                         'Error checks owner decoration.')
+        request.user = self.user2
+        response = simple_view(request, news_id=self.news.id)
+        self.assertEqual(response.status_code, 403,
+                         'Error checks not owner decoration.')

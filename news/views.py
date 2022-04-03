@@ -62,8 +62,7 @@ def news_item_delete(request, news_id):
     return render(request, '404.html')
 
 
-@permission_required(('news.add_news', 'news.add_category'),
-                     raise_exception=True)
+@permission_required('news.add_news', raise_exception=True)
 @staff_member_required
 def news_item_add(request):
     print(request.user)
@@ -86,8 +85,7 @@ def news_item_add(request):
 
 
 @check_obj_exist(News, 'news_id')
-@permission_required(('news.change_news', 'news.add_category'),
-                     raise_exception=True)
+@permission_required('news.change_news', raise_exception=True)
 @staff_member_required
 @check_owner
 def news_item_edit(request, news_id):
