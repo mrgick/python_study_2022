@@ -15,7 +15,16 @@
             {% for field in form %}
                 <div class="field">
                     <div>{{ field.label_tag }}</div>
-                    <div>{{ field }}</div>
+                    <div>
+                        {{ field }}
+                        {% if field.label == 'Блог' %}
+                            <input id="btnBlogAdd"
+                                   type="button"
+                                   class="blog-add"
+                                   value="добавить"
+                                   onclick="newBlogWindow();"/>
+                        {% endif %}
+                    </div>
                     {% for error in field.errors %}
                         <div class="error-text">
                             <small>{{ error }}</small>
@@ -28,7 +37,10 @@
             </div>
         </form>
         {% if action == 'edit' %}
-            <form id="newsDeleting" action={% url 'news delete' news.id %} method="post">
+            <form id="newsDeleting"
+                  action
+                  {% url 'news delete' news.id %}
+                  method="post">
                 {% csrf_token %}
                 <div class="btn-delete">
                     <input type="submit" value="Удалить"/>

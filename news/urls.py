@@ -11,4 +11,5 @@ urlpatterns = [
          name='news delete'),
     path('blogs/', views.all_blogs, name='blogs list'),
     path('blog/<int:blog_id>/', views.news_from_blog, name='blog news'),
+    path('blog/add/', views.blog_item_add, name='blog add'),
 ]

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Уведомление
+{% endblock title %}
+{% block static_files %}
+    <link rel="stylesheet" href={% static 'css/info.css' %}/>
+{% endblock static_files %}
+{% block navbar %}
+{% endblock navbar %}
+{% block content %}
+    <div class="info">
+        <p>
+            {% block message %}
+                {% if msg %}
+                    {{ msg }}
+                {% endif %}
+            {% endblock message %}
+        </p>
+        {% if no_redirect is None %}
+            <a href={% url 'home' %}>Вернуться на главную.</a>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .decorators import check_obj_exist, check_owner
 from .models import News, Category
-from .forms import NewsForm
+from .forms import NewsForm, CategoryForm
 
 
 def get_pagination(request, obj, max_per_page):
@@ -29,6 +29,28 @@ def all_blogs(request):
     page_obj = get_pagination(request, blogs_list, 10)
     content = {'page_obj': page_obj}
     return render(request, 'news/blogList.html', content)
+
+
+@permission_required('news.add_category', raise_exception=True)
+@staff_member_required
+def blog_item_add(request):
+    print(request.user)
+    if request.method == 'POST':
+        form = CategoryForm(data=request.POST)
+        if form.is_valid():
+            blog_name = form.cleaned_data.get('name')
+            blog = Category.objects.filter(name=blog_name)
+            if not blog:
+                blog = form.save()
+                msg = "Блог {0}:{1} добавлен.".format(blog.id, blog.name)
+                context = {'msg': msg, 'no_redirect': True}
+                return render(request, 'info.html', context)
+            form.add_error('name',
+                           "Блог {0} уже существует.".format(blog_name))
+    else:
+        form = CategoryForm()
+    context = {'form': form}
+    return render(request, 'news/blogAddItem.html', context)
 
 
 @check_obj_exist(Category, 'blog_id')
@@ -65,7 +87,6 @@ def news_item_delete(request, news_id):
 @permission_required('news.add_news', raise_exception=True)
 @staff_member_required
 def news_item_add(request):
-    print(request.user)
     if request.method == 'POST':
         news = News(owner=request.user)
         form = NewsForm(data=request.POST, files=request.FILES, instance=news)

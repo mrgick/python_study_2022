@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Добавление блога
+{% endblock title %}
+{% block static_files %}
+    <link rel="stylesheet" href={% static 'css/news/blogAddItem.css' %}/>
+{% endblock static_files %}
+{% block navbar %}
+{% endblock navbar %}
+{% block content %}
+    <div class="editor">
+        <form action {% url 'blog add' %} method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="field">
+                    <div>{{ field.label_tag }}</div>
+                    <div>{{ field }}</div>
+                    {% for error in field.errors %}
+                        <div class="error-text">
+                            <small>{{ error }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="btn-submit">
+                <input type="submit" value="Добавить"/>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

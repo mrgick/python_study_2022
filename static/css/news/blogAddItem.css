@@ -1,0 +1,31 @@
+div.editor {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    max-width: 600px;
+    color: white;
+}
+
+div.editor * {
+    margin-bottom: 10px;
+}
+
+.error-text {
+    color: var(--color-red1);
+    font-size: 16px;
+}
+
+.field input {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-submit input {
+    margin-top: 20px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--color-white1);
+    background-color: var(--color-blue1);
+}
