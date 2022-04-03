@@ -5,14 +5,16 @@
 {% endblock title %}
 {% block static_files %}
     <link rel="stylesheet" href={% static 'css/news/blogList.css' %}/>
+    <link rel="stylesheet" href={% static 'css/news/pagination.css' %}/>
 {% endblock static_files %}
 {% block content %}
     <div class="text-title">Список блогов</div>
     <ul class="list-group">
-        {% for blog in blogs_list %}
+        {% for blog in page_obj %}
             <li class="list-item">
                 <a href={% url 'blog news' blog.id %}>{{ blog.name }}</a>
             </li>
         {% endfor %}
     </ul>
+    {% include 'news/pagination.html' %}
 {% endblock content %}

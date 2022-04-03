@@ -1,0 +1,28 @@
+.pagination {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: var(--color-white1);
+    font-size: 16px;
+}
+
+.step-links {
+    padding: 10px;
+    background-color: var(--color-light-blue1);
+    border: 1px solid var(--color-white1);
+    border-radius: 10px;
+}
+
+
+.step-links a {
+    margin: 3px;
+    text-decoration: none;
+    color: var(--color-blue1);
+}
+
+.step-links a:hover {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: var(--color-light-blue2);
+}

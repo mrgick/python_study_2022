@@ -5,6 +5,7 @@
 {% endblock title %}
 {% block static_files %}
     <link rel="stylesheet" href={% static 'css/news/newsList.css' %}/>
+    <link rel="stylesheet" href={% static 'css/news/pagination.css' %}/>
 {% endblock static_files %}
 {% block content %}
     {% if request.user.is_staff or request.user.is_superuser %}
@@ -15,7 +16,7 @@
     <h1 class="news-title">{{ title_name }}</h1>
     <div class="newsList">
         <div class="flex-container">
-            {% for news in news_list %}
+            {% for news in page_obj %}
                 <div>
                     <div class="img-wrapper">
                         {% if news.image %}
@@ -35,4 +36,5 @@
             {% endfor %}
         </div>
     </div>
+    {% include 'news/pagination.html' %}
 {% endblock content %}
