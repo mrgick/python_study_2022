@@ -24,7 +24,7 @@ def googling(keywords: str):
 def main():
     input_value = input('Введите произвольную строку: ')
     for i in range(0, len(input_value), 1):
-        if i == 3:
+        if i == 2:
             continue
         if input_value[i] in ["c", "с"]:
             print('В произвольной строке присутствует символ "c".')
