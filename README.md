@@ -13,4 +13,8 @@
   - pip install -r requirements.txt
 - запуск сервера
   - python manage.py runserver
-  - (wsgi и asgi не настраивал)
+# Управление
+- пользователи (полномочия - login:pass)
+  - суперпользователь - admin:admin
+  - персонал - userstaff:sNRtfy9a8rwSzMq
+  - обычный - simpleuser:sNRtfy9a8rwSzMq
