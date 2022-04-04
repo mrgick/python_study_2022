@@ -1,32 +1,22 @@
-from django.shortcuts import render, redirect, HttpResponse
-from django.core.paginator import Paginator
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import permission_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .decorators import check_obj_exist, check_owner
 from .models import News, Category
 from .forms import NewsForm, CategoryForm
-
-
-def get_pagination(request, obj, max_per_page):
-    """
-        Добавление пагинации.
-    """
-    paginator = Paginator(obj, max_per_page)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return page_obj
+from .utils import pagination
 
 
 def home(request):
     news_list = News.objects.order_by('-modified_date')[:5]
-    page_obj = get_pagination(request, news_list, 10)
+    page_obj = pagination(request, news_list, 10)
     content = {'page_obj': page_obj, 'title_name': 'Последние новости'}
     return render(request, 'news/newsList.html', content)
 
 
 def all_blogs(request):
     blogs_list = Category.objects.all().order_by('name')
-    page_obj = get_pagination(request, blogs_list, 10)
+    page_obj = pagination(request, blogs_list, 10)
     content = {'page_obj': page_obj}
     return render(request, 'news/blogList.html', content)
 
@@ -57,7 +47,7 @@ def blog_item_add(request):
 def news_from_blog(request, blog_id):
     blog = Category.objects.filter(id=blog_id).first()
     news_list = News.objects.filter(blog=blog).order_by('-modified_date')
-    page_obj = get_pagination(request, news_list, 10)
+    page_obj = pagination(request, news_list, 10)
     content = {
         'page_obj': page_obj,
         'title_name': 'Новости блога {0}'.format(blog.name)
