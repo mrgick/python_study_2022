@@ -38,8 +38,7 @@
         </form>
         {% if action == 'edit' %}
             <form id="newsDeleting"
-                  action
-                  {% url 'news delete' news.id %}
+                  action="{% url 'news delete' news.id %}"
                   method="post">
                 {% csrf_token %}
                 <div class="btn-delete">
