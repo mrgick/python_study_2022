@@ -13,8 +13,3 @@
   - pip install -r requirements.txt
 - запуск сервера
   - python manage.py runserver
-# Управление
-- пользователи (полномочия - login:pass)
-  - суперпользователь - admin:admin
-  - персонал - userstaff:sNRtfy9a8rwSzMq
-  - обычный - simpleuser:sNRtfy9a8rwSzMq
